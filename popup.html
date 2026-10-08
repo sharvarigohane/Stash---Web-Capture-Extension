@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="color-scheme" content="light dark">
+<title>Stash</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><rect class="logo-bg" width="24" height="24" rx="7"/><path class="logo-stack back" d="M6.5 7.5h10.8a1.4 1.4 0 0 1 1.4 1.4v8.6H7.9a1.4 1.4 0 0 1-1.4-1.4Z"/><path class="logo-stack front" d="M5.5 6.5h10.8a1.4 1.4 0 0 1 1.4 1.4v9.8H6.9a1.4 1.4 0 0 1-1.4-1.4Z"/><path class="logo-mark" d="M9.2 7.8v4.4l2.1-1.4 2.1 1.4V7.8"/></svg>
+    <span>Stash</span>
+  </div>
+  <div class="tools">
+    <button id="searchBtn" class="tool grow" title="Search (Ctrl+K)" aria-label="Search">
+      <svg class="ico" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <span class="tool-label">Search</span><kbd>Ctrl K</kbd>
+    </button>
+    <button id="exportBtn" class="tool" aria-label="Export backup" title="Export all data (JSON)">
+      <svg class="ico" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>
+    </button>
+    <button id="themeBtn" class="tool" aria-label="Switch theme" title="Switch theme">☾</button>
+    <button id="expandBtn" class="tool" aria-label="Make workspace larger" title="Make workspace larger">
+      <svg class="ico" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 4H4v3M17 4h3v3M4 17v3h3M20 17v3h-3"/></svg>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-list" aria-label="Workspace sections">
+  <button class="nav active" data-tab="tasks" aria-label="Tasks">
+    <span class="nav-label">Tasks</span><b id="taskCount">0</b>
+  </button>
+  <button class="nav" data-tab="notes" aria-label="Notes">
+    <span class="nav-label">Notes</span><b id="noteCount">0</b>
+  </button>
+  <button class="nav" data-tab="inbox" aria-label="Inbox">
+    <span class="nav-label">Inbox</span><b id="inboxCount">0</b>
+  </button>
+</nav>
+
+<main>
+  <!-- TASKS -->
+  <section id="tasks" class="panel active">
+    <div class="panel-head solo"><h2>Tasks</h2></div>
+    <div class="workspace-hero task-hero">
+      <div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <div class="hero-kicker">MAKE IT ACTIONABLE</div>
+        <h1>Turn a thought into a next step.</h1>
+        <p>Add something you need to do, or send a selected passage from the web straight here.</p>
+      </div>
+    </div>
+    <div class="add-row task-add-row">
+      <input id="taskInput" type="text" maxlength="200" placeholder="What needs doing?">
+      <div class="due-control">
+        <button id="dueToggle" class="date-toggle" type="button" aria-label="Add due date" title="Add due date">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="15" rx="2.5"/><path d="M8 3.5v4M16 3.5v4M4 10h16"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg>
+        </button>
+        <input id="taskDue" class="due-input" type="date" title="Due date" aria-label="Due date">
+      </div>
+      <button id="addTask" class="primary">Add</button>
+    </div>
+    <div id="listWrap">
+      <div class="filter-row">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="active">To do</button>
+        <button class="filter" data-filter="done">Done</button>
+        <button id="clearDone" class="text-btn">Clear done</button>
+      </div>
+      <ul id="taskList"></ul>
+      <div id="taskEmpty" class="empty hidden"></div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="notes" class="panel">
+    <div id="notesList">
+      <div class="panel-head"><h2>Notes</h2><button id="newNote" class="primary">New note</button></div>
+      <div id="tagBar" class="tag-bar"></div>
+      <div id="noteGrid" class="note-grid"></div>
+      <div id="noteEmpty" class="empty hidden"></div>
+    </div>
+
+    <div id="noteEditor" class="editor hidden">
+      <div class="editor-kicker">FOCUSED NOTE</div>
+      <input id="noteTitle" class="note-title" type="text" maxlength="120" placeholder="Note title">
+      <div id="toolbar" class="toolbar" aria-label="List formatting">
+        <button data-cmd="insertUnorderedList" title="Turn selected lines into bullet points">• Bullets</button>
+        <button data-cmd="insertOrderedList" title="Turn selected lines into numbered points">1. Numbered</button>
+      </div>
+      <div id="noteBody" class="rich-body" contenteditable="true" data-placeholder="Write your note here. Keep it clear and focused."></div>
+      <input id="noteTags" class="tags-input" type="text" placeholder="Tags, e.g. #idea, #work">
+      <div id="sourceWrap" class="source hidden"></div>
+      <div class="editor-actions">
+        <button id="cancelNote" class="ghost">Cancel</button>
+        <button id="saveNote" class="primary">Save note</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- INBOX -->
+  <section id="inbox" class="panel">
+    <div class="panel-head solo"><h2>Inbox</h2></div>
+    <p class="muted lead">Everything you capture from the web lands here. Turn it into a focused note or task, or dismiss it.</p>
+    <div class="add-row">
+      <input id="inboxInput" type="text" placeholder="Jot down a thought or paste a link">
+      <button id="addInbox" class="primary">Add</button>
+      <button id="savePage" class="ghost capture-action"><svg class="capture-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5.5h12a1.5 1.5 0 0 1 1.5 1.5v10.5H4.5V7A1.5 1.5 0 0 1 6 5.5Z"/><path d="M9 5.5V4h6v1.5M8 10h8M8 13h5"/><path d="M12 16.5v-4M10.3 14.2 12 16l1.7-1.8"/></svg><span>Capture this page</span></button>
+    </div>
+    <div class="filter-row">
+      <button class="filter active" data-inbox-filter="all">All</button>
+      <button class="filter" data-inbox-filter="page">Pages</button>
+      <button class="filter" data-inbox-filter="snippet">Snippets</button>
+    </div>
+    <div id="inboxList"></div>
+    <p id="inboxEmpty" class="empty hidden"></p>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="foot-hint">Web capture: right-click → Stash, or press Alt+Shift+S.</p>
+</footer>
+
+<div id="modal" class="backdrop hidden"><div class="dialog"><button id="modalClose" class="modal-close" aria-label="Close">×</button><div id="modalContent"></div></div></div>
+<div id="searchOverlay" class="backdrop hidden"><div class="dialog search"><input id="globalSearch" type="text" placeholder="Search notes, tasks and inbox"><div id="searchResults"></div><p class="muted small">Enter opens the first result · Esc closes</p></div></div>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="popup.js"></script>
+</body>
+</html>
