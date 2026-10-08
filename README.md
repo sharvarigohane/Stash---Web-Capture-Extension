@@ -4,9 +4,9 @@ Capture web research and turn it into organized notes and actionable tasks, with
 
 Select text on any website, save it with one click, and Stash keeps a link back to the original source. Triage everything later from a clean inbox.
 
-<img width="305" height="515" alt="image" src="https://github.com/user-attachments/assets/f6d579ed-723a-4c48-ae53-7cd9ad317b49" />
-<img width="295" height="483" alt="image" src="https://github.com/user-attachments/assets/f8e960d4-c726-4ddf-a2ec-426c42550c0c" />
-<img width="305" height="515" alt="image" src="https://github.com/user-attachments/assets/73c0cd99-04f7-4adf-b922-c599324b73fd" />
+<img width="300" height="500" alt="image" src="https://github.com/user-attachments/assets/f6d579ed-723a-4c48-ae53-7cd9ad317b49" />
+<img width="290" height="480" alt="image" src="https://github.com/user-attachments/assets/f8e960d4-c726-4ddf-a2ec-426c42550c0c" />
+<img width="300" height="500" alt="image" src="https://github.com/user-attachments/assets/73c0cd99-04f7-4adf-b922-c599324b73fd" />
 
 <!-- Add 2-3 screenshots here (popup in light mode, dark mode, task view) -->
 <!-- ![Stash popup – dark mode](screenshots/popup-dark.png) -->
