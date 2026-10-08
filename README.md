@@ -6,6 +6,10 @@ Select text on any website, save it with one click, and Stash keeps a link back 
 
 <img width="300" height="500" alt="image" src="https://github.com/user-attachments/assets/f6d579ed-723a-4c48-ae53-7cd9ad317b49" />
 
+
+
+
+
 <img width="300" height="500" alt="image" src="https://github.com/user-attachments/assets/73c0cd99-04f7-4adf-b922-c599324b73fd" />
 
 <!-- Add 2-3 screenshots here (popup in light mode, dark mode, task view) -->
